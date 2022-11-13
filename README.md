@@ -15,7 +15,7 @@ New words will be taught to the user by a spaced repetition system, and this fea
 - Words will be removed from this list if the user succeeds in the cloze test, and added to the “Known” list. 
 
 **Project Documents**
-1. *Specification Report:* [relative_link](Specification_Report.pdf)
+1. *Specification Report:* [relative_link](SpecificationReport.pdf)
 
 **References:**
 1. https://en.wikipedia.org/wiki/Input_hypothesis#cite_note-Krashen1977-1
