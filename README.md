@@ -14,6 +14,9 @@ New words will be taught to the user by a spaced repetition system, and this fea
 - Any words that have been encountered more than a constant amount of times will be added to the user’s “Words to Learn” list, as the user will start to notice these -words more and more due to the Baader–Meinhof phenomenon [3]. 
 - Words will be removed from this list if the user succeeds in the cloze test, and added to the “Known” list. 
 
+**Project Documents**
+1. *Specification Report:* [relative_link](Specification_Report.pdf)
+
 **References:**
 1. https://en.wikipedia.org/wiki/Input_hypothesis#cite_note-Krashen1977-1
 2. https://www.leonardoenglish.com/blog/comprehensible-input#toc-0
