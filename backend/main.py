@@ -9,6 +9,8 @@ from flask import Flask, session, app, request, jsonify
 app = Flask(__name__)
 config.set_values()
 
+# run the flask app from terminal with this command:
+# FLASK_APP=main.py flask run
 
 def connect():
     conn = psycopg2.connect(
