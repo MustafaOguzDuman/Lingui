@@ -39,8 +39,7 @@ public class VideoRetriever {
         //for more: https://developers.google.com/youtube/v3/docs/search/list
         search.setType("video");
         search.setVideoCaption("closedCaption");
-        //search.setLocation("44.5800000,-103.4600000");
-        //search.setLocationRadius("1200mi");
+        search.setRegionCode("US");
         search.setVideoDuration("short");
         search.setFields("items(id(videoId),snippet(title,channelId,channelTitle,publishedAt))");
         search.setMaxResults(10L);
