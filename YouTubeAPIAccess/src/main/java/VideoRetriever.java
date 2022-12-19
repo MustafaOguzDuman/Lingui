@@ -32,6 +32,7 @@ public class VideoRetriever {
         search.setKey(API_KEY);
         search.setQ(query);
         search.setType("video");
+        search.setVideoCaption("closedCaption");
         search.setFields("items(id(videoId),snippet(title,channelId,channelTitle,publishedAt))");
         search.setMaxResults(10L);
 
