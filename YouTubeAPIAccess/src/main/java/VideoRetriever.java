@@ -41,6 +41,7 @@ public class VideoRetriever {
         search.setVideoCaption("closedCaption");
         search.setRegionCode("US");
         search.setVideoDuration("short");
+        search.setVideoCategoryId("2");
         search.setFields("items(id(videoId),snippet(title,channelId,channelTitle,publishedAt))");
         search.setMaxResults(10L);
 
