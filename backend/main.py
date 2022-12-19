@@ -9,8 +9,10 @@ from flask import Flask, session, app, request, jsonify
 app = Flask(__name__)
 config.set_values()
 
+
 # run the flask app from terminal with this command:
 # FLASK_APP=main.py flask run
+
 
 def connect():
     conn = psycopg2.connect(
@@ -123,7 +125,7 @@ def get_ease_factor(user_id):
 def get_word_strength(user_id, word_id):
     # get word strength from database
     cursor.execute("SELECT strength FROM word_strength_due_list WHERE user_id = %s AND word_id = %s",
-                     (user_id, word_id))
+                   (user_id, word_id))
     strength = cursor.fetchone()[0]
     return strength
 
@@ -156,12 +158,8 @@ def add_word_to_user():
 
     connection.commit()
 
-"""
-@app.route('/add-word-to-user/<user_id>/<word_id>/<word_strength>/<due_date>', methods=['GET'])
-def add_word_to_user(user_id, word_id, word_strength, due_date):
-    cursor.execute("UPDATE word_strength_due_list SET strength = %s, due_date = %s WHERE user_id = %s AND word_id = %s", (word_strength, due_date, user_id, word_id))
-"""
+    return jsonify({'success': True}), 200
+
 
 if __name__ == '__main__':
     app.run(debug=True)
-
