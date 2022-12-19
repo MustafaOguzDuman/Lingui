@@ -23,19 +23,29 @@ public class VideoRetriever {
     public List<String> retrieveVideos() throws IOException, GeneralSecurityException {
         NetHttpTransport transport = GoogleNetHttpTransport.newTrustedTransport();
         final JsonFactory JSON_FACTORY = new JacksonFactory();
+        //connect to YT API
         YouTube youtube = new YouTube.Builder(transport, JSON_FACTORY, request -> {})
                 .setApplicationName("video-retriever")
                 .build();
 
+        //Create search query
         String query = String.join(" ", words);
         YouTube.Search.List search = youtube.search().list("id,snippet");
         search.setKey(API_KEY);
         search.setQ(query);
+        //search.setQ("surfing");
+
+        //search setting
+        //for more: https://developers.google.com/youtube/v3/docs/search/list
         search.setType("video");
         search.setVideoCaption("closedCaption");
+        //search.setLocation("44.5800000,-103.4600000");
+        //search.setLocationRadius("1200mi");
+        search.setVideoDuration("short");
         search.setFields("items(id(videoId),snippet(title,channelId,channelTitle,publishedAt))");
         search.setMaxResults(10L);
 
+        //get results
         SearchListResponse response = search.execute();
         List<SearchResult> results = response.getItems();
 
