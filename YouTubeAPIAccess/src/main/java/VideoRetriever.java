@@ -3,12 +3,15 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.youtube.YouTube;
+import com.google.api.services.youtube.model.CaptionListResponse;
 import com.google.api.services.youtube.model.SearchListResponse;
 import com.google.api.services.youtube.model.SearchResult;
 //import com.google.api.services.youtube.model.Video;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,8 +63,9 @@ public class VideoRetriever {
             );
             videos.add(video);
         }*/
-
+        CaptionListResponse cl = null;
         List<String> videos = new ArrayList<>();
+        String id = "";
         for (SearchResult result : results) {
             String video = "";
             video += result.getId().getVideoId();
@@ -73,7 +77,21 @@ public class VideoRetriever {
             video += "=======" ;
             video += result.getSnippet().getPublishedAt();
             videos.add(video);
+            id = result.getId().getVideoId().toString();
+            // Define and execute the API request
+            
         }
+        YouTube.Captions.List request = youtube.captions()
+                .list("id", id);
+        request.setKey(API_KEY);
+        cl = request.execute();
+        System.out.println(cl);
+        OutputStream output = new FileOutputStream("YOUR_FILE");
+        YouTube.Captions.Download red = youtube.captions()
+            .download(cl.getItems().get(0).getId());
+        red.getMediaHttpDownloader();
+        red.executeMediaAndDownloadTo(output);
+
         return videos;
     }
 }
