@@ -26,4 +26,5 @@ tomli==2.0.1
 urllib3==1.26.13
 Werkzeug==2.2.2
 xlrd==2.0.1
+youtube-transcript-api==0.5.0
 zipp==3.11.0
