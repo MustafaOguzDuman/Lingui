@@ -4,7 +4,10 @@ import psycopg2
 import config
 
 from youtube_transcript_api import YouTubeTranscriptApi
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 
+
+app = Flask(__name__)
 
 config.set_values()
 
@@ -22,6 +25,19 @@ def connect():
 
 connection = connect()
 cursor = connection.cursor()
+
+
+@app.route('/videos', methods=['GET'])
+def get_videos():
+    cursor.execute("SELECT DISTINCT video_id FROM caption")
+    return cursor.fetchall()
+
+
+# add flask endpoint to search for word in youtube
+@app.route("/transcript/<video_id>", methods=['GET'])
+def get_transcript(video_id):
+    cursor.execute("SELECT CAST(start_time * 1000 AS INT) AS start, CAST((start_time + duration) * 1000 AS INT) AS end, content FROM caption WHERE video_id = %s ORDER BY start", (video_id,))
+    return cursor.fetchall()
 
 
 def add_word_to_word_id_table(word):
@@ -157,7 +173,7 @@ def search_for_word_in_youtube():
 
 
 if __name__ == "__main__":
-    main()
+    app.run(debug=True)
 
 
 # TODO: caption = video_id, [word_id], start_time, duration, text

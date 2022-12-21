@@ -150,6 +150,8 @@ def add_word_to_user():
     user_id = json['user_id']
     word_id = json['word_id']
 
+    # TODO: check if already exists in database
+
     word_strength = 1
     due_date = datetime.datetime.now() + datetime.timedelta(minutes=1)
 
